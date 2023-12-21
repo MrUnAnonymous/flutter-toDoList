@@ -27,6 +27,15 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
+  //Save New List
+  void saveNewTask() {
+    setState(() {
+      toDoList.add([_controller.text, false]);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
   //new task
   void createNewTask() {
     showDialog(
@@ -34,28 +43,41 @@ class _HomepageState extends State<Homepage> {
       builder: (context) {
         return DialogBox(
           controller: _controller,
+          onSave: saveNewTask,
+          onCancel: () => Navigator.of(context).pop(),
         );
       },
     );
   }
 
+  //delete task
+  void deleteTask(int index) {
+    setState(() {
+      toDoList.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[200],
-      appBar: AppBar(
-        title: const Center(
-            child: Text(
-          'TO DO',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        )),
-        elevation: 0.0,
-        backgroundColor: Colors.purple,
-      ),
+      backgroundColor: Colors.purple[100],
+      // appBar: AppBar(
+      //   title: const Center(
+      //       child: Text(
+      //     'TO DO',
+      //     style: TextStyle(
+      //         fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+      //   )),
+      //   elevation: 0.0,
+      //   backgroundColor: Colors.black,
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
-        backgroundColor: Colors.purple,
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.black,
       ),
       body: ListView.builder(
         itemCount: toDoList.length,
@@ -64,6 +86,7 @@ class _HomepageState extends State<Homepage> {
             taskName: toDoList[index][0],
             taskCompleted: toDoList[index][1],
             onChanged: (value) => checkBoxChanged(value, index),
+            deleteFunction: (context) => deleteTask(index),
           );
         },
       ),
