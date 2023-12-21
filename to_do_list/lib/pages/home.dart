@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:to_do_list/utils/dailog_box.dart';
 import 'package:to_do_list/utils/todo_tile.dart';
 
 class Homepage extends StatefulWidget {
@@ -9,10 +12,12 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  //text controller
+  final _controller = TextEditingController();
   //List of tasks
   List toDoList = [
     ["KYS", false],
-    ["KYS", false],
+    ["Learn Flutter", false],
   ];
 
   //method
@@ -22,14 +27,35 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
+  //new task
+  void createNewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: _controller,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.purple[200],
       appBar: AppBar(
-        title: Center(child: Text('TO DO')),
+        title: const Center(
+            child: Text(
+          'TO DO',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        )),
         elevation: 0.0,
-        backgroundColor: Colors.purple[300],
+        backgroundColor: Colors.purple,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: createNewTask,
+        backgroundColor: Colors.purple,
+        child: Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: toDoList.length,
