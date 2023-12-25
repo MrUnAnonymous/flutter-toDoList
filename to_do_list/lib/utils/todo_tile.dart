@@ -25,11 +25,11 @@ class ToDoTile extends StatelessWidget {
             onPressed: deleteFunction,
             icon: Icons.delete,
             backgroundColor: Colors.red.shade300,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(25),
           )
         ]),
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
               color: Colors.grey[100], borderRadius: BorderRadius.circular(12)),
           child: Row(
