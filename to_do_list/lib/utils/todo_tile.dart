@@ -18,7 +18,7 @@ class ToDoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
+      padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
       child: Slidable(
         endActionPane: ActionPane(motion: StretchMotion(), children: [
           SlidableAction(
@@ -29,10 +29,9 @@ class ToDoTile extends StatelessWidget {
           )
         ]),
         child: Container(
-          padding: EdgeInsets.all(24),
+          padding: EdgeInsets.all(15),
           decoration: BoxDecoration(
-              color: Colors.purple[200],
-              borderRadius: BorderRadius.circular(12)),
+              color: Colors.grey[100], borderRadius: BorderRadius.circular(12)),
           child: Row(
             children: [
               Checkbox(
@@ -45,7 +44,7 @@ class ToDoTile extends StatelessWidget {
               Text(
                 taskName,
                 style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 18,
                     decoration: taskCompleted
                         ? TextDecoration.lineThrough
                         : TextDecoration.none),

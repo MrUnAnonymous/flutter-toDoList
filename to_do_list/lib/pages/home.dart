@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_list/data/database.dart';
+import 'package:to_do_list/main.dart';
 import 'package:to_do_list/utils/dailog_box.dart';
 import 'package:to_do_list/utils/todo_tile.dart';
 
@@ -19,7 +20,6 @@ class _HomepageState extends State<Homepage> {
 
   //text controller
   final _controller = TextEditingController();
-
   ToDoDatabase db = ToDoDatabase();
 
   @override
@@ -42,11 +42,23 @@ class _HomepageState extends State<Homepage> {
 
   //Save New List
   void saveNewTask() {
+    if (_controller.text.isEmpty) {
+      // Show an error message or handle the empty string case.
+      // For example, you can display a snackbar with an error message.
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Task name cannot be empty!'),
+        ),
+      );
+      return;
+    }
+
     setState(() {
       db.toDoList.add([_controller.text, false]);
       _controller.clear();
     });
-    Navigator.of(context).pop();
+
+    Navigator.of(context).pop(); // Close the dialog
     db.updateDatabase();
   }
 
@@ -75,13 +87,13 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[100],
+      backgroundColor: Colors.blueGrey,
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.grey[100],
         child: Icon(
           Icons.add,
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
       body: Padding(
