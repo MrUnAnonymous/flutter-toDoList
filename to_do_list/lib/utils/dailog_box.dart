@@ -24,7 +24,10 @@ class DialogBox extends StatelessWidget {
             controller: controller,
             decoration: const InputDecoration(
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
+                  borderSide: BorderSide(width: 3, color: Colors.white),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey)),
                 hintText: "Add a new task"),
           ),
 

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_list/data/database.dart';
-import 'package:to_do_list/main.dart';
 import 'package:to_do_list/utils/dailog_box.dart';
 import 'package:to_do_list/utils/todo_tile.dart';
 
